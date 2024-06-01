@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "978642896161",
+    "project_id": "macropay-c6470",
+    "storage_bucket": "macropay-c6470.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978642896161:android:ebf04a2d7c61cf20b8ea60",
+        "android_client_info": {
+          "package_name": "com.go.macropay"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ--ZlRiRj3s6z2_qUGvVoOW6cSYcu2rs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
