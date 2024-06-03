@@ -3,6 +3,7 @@ package com.go.macropay
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.Text
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
@@ -15,22 +16,13 @@ import com.go.macropay.ui.theme.MacropayTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MacropayTheme {
-                val viewModel: MainViewModel = hiltViewModel()
-                val detailViewModel: DetailViewModel = hiltViewModel()
-                val registerViewModel: RegisterViewModel = hiltViewModel()
-                val loginViewModel: LoginViewModel = hiltViewModel()
                 val navController = rememberNavController()
-
                 RootNavGraph(
-                    mainViewModel = viewModel,
-                    detailViewModel = detailViewModel,
-                    loginViewModel = loginViewModel,
-                    registerViewModel = registerViewModel,
                     navController = navController
                 )
             }

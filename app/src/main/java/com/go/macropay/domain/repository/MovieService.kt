@@ -1,4 +1,4 @@
-package com.go.macropay.data
+package com.go.macropay.domain.repository
 
 import com.go.macropay.data.remote.models.moviedetail.MovieDetailDTO
 import com.go.macropay.data.remote.models.movielist.MovieListDTO

@@ -1,4 +1,4 @@
-package com.go.macropay.di
+package com.go.macropay.di.network
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore

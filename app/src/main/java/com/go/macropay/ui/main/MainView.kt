@@ -41,12 +41,14 @@ import com.go.macropay.R
 import com.go.macropay.domain.models.Movie
 import com.go.macropay.ui.components.TopAppBar
 import com.go.macropay.ui.components.TopAppBarWithoutIcon
+import com.go.macropay.ui.components.TopAppBarWithoutIconAndWithAction
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainView(
     mainViewModel: MainViewModel,
     navigateToMovieDetail: (idMovie: Int) -> Unit,
+    logout: () -> Unit
 ) {
     val loading by mainViewModel.loading.observeAsState(initial = false)
     val error by mainViewModel.error.observeAsState(initial = true)
@@ -57,9 +59,10 @@ fun MainView(
 
     val movieList: MutableList<Movie> = mainViewModel.filterMovieList
     Scaffold(topBar = {
-        TopAppBarWithoutIcon(
-            title = "MAIN"
-        )
+        TopAppBarWithoutIconAndWithAction(title = "MAIN",
+        logout ={
+            logout()
+        })
     },content = {
         Column(
             modifier = Modifier
