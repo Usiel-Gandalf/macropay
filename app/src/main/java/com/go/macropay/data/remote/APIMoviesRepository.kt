@@ -1,6 +1,6 @@
 package com.go.macropay.data.remote
 
-import com.go.macropay.data.MovieService
+import com.go.macropay.domain.repository.MovieService
 import com.go.macropay.domain.models.Movie
 import com.go.macropay.domain.models.MovieDetail
 import com.go.macropay.domain.repository.IMoviesRepository

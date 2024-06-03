@@ -1,6 +1,6 @@
-package com.go.macropay.di
+package com.go.macropay.di.network
 
-import com.go.macropay.data.MovieService
+import com.go.macropay.domain.repository.MovieService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

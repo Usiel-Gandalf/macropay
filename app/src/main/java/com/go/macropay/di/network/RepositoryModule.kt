@@ -1,4 +1,4 @@
-package com.go.macropay.di
+package com.go.macropay.di.network
 
 import com.go.macropay.data.remote.FirebaseAuthRepositoryImpl
 import com.go.macropay.domain.repository.AuthRepository

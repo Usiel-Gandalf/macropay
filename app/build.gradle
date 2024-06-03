@@ -104,4 +104,12 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth-ktx:22.0.0")
     implementation("com.google.firebase:firebase-firestore-ktx:22.0.0")
+
+    def app_compat = "1.2.0"
+    implementation "androidx.appcompat:appcompat:$app_compat"
+
+    // Biometric
+    implementation "androidx.biometric:biometric:1.2.0-alpha04"
+    implementation 'com.google.android.material:material:1.5.0'
+
 }

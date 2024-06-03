@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.go.macropay.R
 import com.go.macropay.ui.components.TopAppBar
+import com.go.macropay.ui.components.TopAppBarWithoutIcon
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,7 +40,7 @@ fun RegisterView(
     val context = LocalContext.current
 
     Scaffold(topBar = {
-        TopAppBar(title = "REGISTER", navToBackView = { onClicGoToLogin() })
+        TopAppBarWithoutIcon("REGISTER")
     }, content = {
         Column(
             modifier = Modifier

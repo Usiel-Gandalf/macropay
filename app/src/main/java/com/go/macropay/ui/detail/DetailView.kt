@@ -43,12 +43,16 @@ import com.go.macropay.ui.navigation.NavigationViews
 fun DetailView(
     detailViewModel: DetailViewModel,
     navToBackView: () -> Unit,
+    logout: () -> Unit
 ) {
     val movie: MovieDetail = detailViewModel.movieDetail
 
     Scaffold(topBar = {
         TopAppBar(
-            title = "Atras", navToBackView = navToBackView
+            title = "Atras", navToBackView = navToBackView,
+            logout = {
+                logout()
+            }
         )
     }, content = {
 
