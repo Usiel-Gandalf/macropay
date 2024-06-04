@@ -27,20 +27,21 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.go.macropay.R
-import com.go.macropay.ui.components.TopAppBar
-import com.go.macropay.ui.components.TopAppBarWithoutIcon
+import com.go.macropay.ui.components.TopAppBarWithBackIcon
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterView(
     registerViewModel: RegisterViewModel,
     onClicGoToLogin: () -> Unit,
-    onLoginNavigateToMain: () -> Unit
+    onLoginNavigateToMain: () -> Unit,
 ) {
     val context = LocalContext.current
 
     Scaffold(topBar = {
-        TopAppBarWithoutIcon("REGISTER")
+        TopAppBarWithBackIcon(navToBackView = {
+            onClicGoToLogin()
+        }, title = "REGISTER")
     }, content = {
         Column(
             modifier = Modifier
@@ -61,8 +62,12 @@ fun RegisterView(
                     registerViewModel.RegisterUser()
                     if (registerViewModel.registerStatusFinal.value) {
                         onLoginNavigateToMain()
-                    }else{
-                        Toast.makeText(context, "Algo salio mal, intente de nuevo.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "Algo salio mal, intente de nuevo.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             )

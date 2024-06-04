@@ -1,6 +1,5 @@
 package com.go.macropay.ui.security.login
 
-import android.content.Context
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
@@ -18,21 +17,16 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -43,13 +37,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.go.macropay.MainActivity_GeneratedInjector
 import com.go.macropay.R
 import com.go.macropay.domain.repository.AuthenticationState
-import com.go.macropay.ui.components.TopAppBar
 import com.go.macropay.ui.components.TopAppBarWithoutIcon
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.flow.StateFlow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -114,7 +104,6 @@ fun LoginView(
     LaunchedEffect(authenticationState) {
         when (authenticationState) {
             is AuthenticationState.Success -> {
-                Toast.makeText(context, "Autenticación exitosa", Toast.LENGTH_LONG).show()
                 navigateToMain()
             }
             is AuthenticationState.Failure -> {

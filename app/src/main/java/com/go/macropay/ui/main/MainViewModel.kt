@@ -17,8 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val apiRepository: IMoviesRepository
-): ViewModel(){
+    private val apiRepository: IMoviesRepository,
+) : ViewModel() {
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
@@ -32,18 +32,19 @@ class MainViewModel @Inject constructor(
     var filterMovieList: MutableList<Movie> = mutableStateListOf()
         private set
 
-    fun getMoviesList(){
+    fun getMoviesList() {
         _loading.value = true
         _error.value = false
 
         viewModelScope.launch(Dispatchers.IO) {
-            when(val result = apiRepository.getMovies()){
+            when (val result = apiRepository.getMovies()) {
                 is ResponseAPI.OnFailure -> {
                     _error.postValue(true)
                     Log.e("MyAppTag", "Ocurrió un error en riskyOperation")
                 }
+
                 is ResponseAPI.Success -> {
-                    withContext(Dispatchers.Main){
+                    withContext(Dispatchers.Main) {
                         _loading.postValue(false)
                         movieList.clear()
                         movieList.addAll(result.data)

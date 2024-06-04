@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
-import com.go.macropay.domain.usecase.BiometricAuthenticator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,7 +30,7 @@ object BiometricModule {
     fun provideBiometricPrompt(
         activity: AppCompatActivity,
         executor: Executor,
-        callback: BiometricPrompt.AuthenticationCallback
+        callback: BiometricPrompt.AuthenticationCallback,
     ): BiometricPrompt {
         return BiometricPrompt(activity, executor, callback)
     }
