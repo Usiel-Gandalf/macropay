@@ -1,6 +1,6 @@
 package com.go.macropay.domain.repository
 
-sealed class AuthenticationState{
+sealed class AuthenticationState {
     object Idle : AuthenticationState()
     object Success : AuthenticationState()
     object Failure : AuthenticationState()

@@ -10,8 +10,8 @@ import java.lang.Exception
 import javax.inject.Inject
 
 class APIMoviesRepository @Inject constructor(
-    private val movieService: MovieService
-): IMoviesRepository{
+    private val movieService: MovieService,
+) : IMoviesRepository {
     override suspend fun getMovies(): ResponseAPI<List<Movie>> {
         return try {
             val result = movieService.getListMovies()
@@ -20,7 +20,7 @@ class APIMoviesRepository @Inject constructor(
             ResponseAPI.Success(result.body()?.results?.map {
                 it.toDomain()
             } ?: emptyList())
-        }catch (e: Exception){
+        } catch (e: Exception) {
             ResponseAPI.OnFailure(e.message.toString())
         }
     }
@@ -29,7 +29,7 @@ class APIMoviesRepository @Inject constructor(
         return try {
             val result = movieService.getDetailMovie(movieId)
             ResponseAPI.Success(result.body()!!.toDomain())
-        }catch (e: Exception){
+        } catch (e: Exception) {
             ResponseAPI.OnFailure(e.message.toString())
         }
     }

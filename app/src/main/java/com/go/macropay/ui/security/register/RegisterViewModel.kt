@@ -1,25 +1,18 @@
 package com.go.macropay.ui.security.register
 
-import android.provider.ContactsContract.CommonDataKinds.Email
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.go.macropay.domain.repository.AuthRepository
 import com.go.macropay.domain.usecase.FirebaseRegisterUseCase
-import com.go.macropay.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-private val firebaseRegisterUseCase: FirebaseRegisterUseCase
-): ViewModel() {
+    private val firebaseRegisterUseCase: FirebaseRegisterUseCase,
+) : ViewModel() {
 
     private val _email = mutableStateOf("")
     val email: State<String> get() = _email
@@ -33,14 +26,14 @@ private val firebaseRegisterUseCase: FirebaseRegisterUseCase
     var registerStatus = false
         private set
 
-    fun RegisterUser(){
+    fun RegisterUser() {
         viewModelScope.launch {
             registerStatus = firebaseRegisterUseCase(email.value, password.value)
             updateRegisterStatus(registerStatus = registerStatus)
         }
     }
 
-    fun updateRegisterStatus(registerStatus: Boolean){
+    fun updateRegisterStatus(registerStatus: Boolean) {
         _registerStatusFinal.value = registerStatus
     }
 

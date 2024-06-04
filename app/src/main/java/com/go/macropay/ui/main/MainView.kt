@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,6 +22,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -30,17 +30,15 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.go.macropay.R
 import com.go.macropay.domain.models.Movie
-import com.go.macropay.ui.components.TopAppBar
-import com.go.macropay.ui.components.TopAppBarWithoutIcon
 import com.go.macropay.ui.components.TopAppBarWithoutIconAndWithAction
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -48,7 +46,7 @@ import com.go.macropay.ui.components.TopAppBarWithoutIconAndWithAction
 fun MainView(
     mainViewModel: MainViewModel,
     navigateToMovieDetail: (idMovie: Int) -> Unit,
-    logout: () -> Unit
+    logout: () -> Unit,
 ) {
     val loading by mainViewModel.loading.observeAsState(initial = false)
     val error by mainViewModel.error.observeAsState(initial = true)
@@ -58,23 +56,28 @@ fun MainView(
     }
 
     val movieList: MutableList<Movie> = mainViewModel.filterMovieList
-    Scaffold(topBar = {
-        TopAppBarWithoutIconAndWithAction(title = "MAIN",
-        logout ={
-            logout()
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    Scaffold(modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            TopAppBarWithoutIconAndWithAction(
+                title = "MAIN",
+                logout = {
+                    logout()
+                },
+                scrollBehavior = scrollBehavior
+            )
+        }, content = {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(it)
+                    .padding(all = 8.dp)
+            ) {
+                LazyCardsForMovies(movieList = movieList, onClicGoToDetail = { idMovie ->
+                    navigateToMovieDetail(idMovie)
+                })
+            }
         })
-    },content = {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it)
-                .padding(all = 8.dp)
-        ) {
-            LazyCardsForMovies(movieList = movieList, onClicGoToDetail = { idMovie ->
-                navigateToMovieDetail(idMovie)
-            })
-        }
-    })
 }
 
 @Composable
@@ -117,13 +120,13 @@ fun LazyCardsForMovies(
                             modifier = Modifier
                                 .align(Alignment.BottomCenter)
                                 .padding(5.dp)
-                                .background(Color.Black.copy(alpha = 0.5f)) // Fondo semitransparente para el texto y el icono
+                                .background(Color.Black.copy(alpha = 0.5f))
                                 .padding(1.dp)
                         ) {
                             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                 Icon(
-                                    painter = painterResource(id = R.drawable.star), // Reemplaza con tu icono
-                                    contentDescription = "Calificacion", // Reemplaza con tu string resource
+                                    painter = painterResource(id = R.drawable.star),
+                                    contentDescription = "Calificacion",
                                     tint = Color.White
                                 )
                                 Text(
